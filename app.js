@@ -1,29 +1,24 @@
 import express from 'express'
+import usuariosRoutes from './routes/usuarios.js'
+import fornecedoresRoutes from './routes/fornecedores.js'
+
 const app = express()
-const port = 3000
 
 // Permitir ler JSON no corpo da requisição
 app.use(express.json())
 
-// Banco de dados da fake/shopee (em memória) 
-const users = [
-  {id: 1, nome: 'João', email: 'joão@email.com'},
-  {id: 2, nome: 'Ana', email: 'ana@email.com'},
-]
+// Adiciona o roteador de usuários
+app.use("/usuarios", usuariosRoutes)
 
-app.get('/', (req, res) => {
-  res.send('<h1>VAI CORINTHIANS</h1>')
+// Adiciona o roteador de fornecedores
+app.use("/fornecedores",fornecedoresRoutes)
+
+const port = 3000
+
+app.get("/", (req, res)=>{
+  res.send("Oi")
 })
 
-app.post('/createUser', (req, res) => {
-  const {nome, sobrenome} = req.body
-  res.send(`Nome completo: ${nome} ${sobrenome}`)
-})
-
-app.get('/users', (req, res) => {
-  res.send(users)
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.listen(port, ()=>{
+    console.log(`App escutando na  porta ${port}`)
 })

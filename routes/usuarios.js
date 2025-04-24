@@ -75,10 +75,9 @@ router.delete("/usuarios/:id", (req, res)=>{
 
     if (index === -1) {
         return res.status(404).json({mensagem: "Usuário não encontrado!"})
-    }else{
-        usuarios.splice(index, 1)
-        res.send(usuarios)
     }
+    produtos.splice(index, 1)
+    res.send(produtos)
 
 })
 
